@@ -1,0 +1,37 @@
+1.1 select * from product where quantity > 30
+1.2 select * from product where quantity > 30 and price between 100 and 300
+1.3 select * from customer where age > 18
+1.4 select * from customer where customer.name like 'Nguyen%' and age > 20
+1.5 select * from product where product.name like 'M%'
+1.6 select * from product where product.name like '%E'
+1.7 select * from product order by quantity
+1.8 select * from product order by price desc
+
+2.1 select sum(quantity) from product where price < 300
+2.2 select price, sum(quantity) from product group by price
+2.3 select product.name from product order by price limit 1
+2.4 select avg(price) from product
+2.5 select sum(price) from product
+2.6 select sum(quantity) from product where price < 300
+2.7 select max(price) from product where product.name like 'M%'
+2.8 select min(price) from product where product.name like 'M%'
+2.9 select avg(price) from product where product.name like 'M%'
+
+3.1 select demo2006.customer.name, demo2006.order.time from demo2006.order, customer where customer.id = demo2006.order.customerId
+3.2 select customer.name, product.name
+from customer
+inner join demo2006.order on customer.id = demo2006.order.customerId
+inner join orderdetail on demo2006.order.id = orderdetail.orderId
+inner join product on orderdetail.productId = product.id
+3.3 select orderId, sum(total) 
+from (select orderdetail.orderId, (orderdetail.quantity* product.price) as total
+from orderdetail inner join product on product.id = orderdetail.productId) as orderTable
+group by orderId
+3.4 select orderId, S from (select orderId, sum(total) as S 
+from (select orderdetail.orderId, (orderdetail.quantity* product.price) as total
+from orderdetail inner join product
+on product.id = orderdetail.productId) as orderTable group by orderId) as huhuhu
+order by S
+
+
+
